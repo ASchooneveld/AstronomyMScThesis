@@ -1,0 +1,20 @@
+%!TEX root = ../thesis.tex
+% ******************************* Thesis Appendix A ****************************
+\chapter{Configuration files}
+
+
+\section{\texttt{SWarp} configuration file}\label{appendix:swarp}
+\lstinputlisting{Appendix1/des_video.swarp.txt}
+
+
+\section{\texttt{SExtractor} configuration file}\label{appendix:sextractor}
+\lstinputlisting{Appendix1/desdm_201310_sex_video.config.txt}
+
+
+
+\section{\texttt{LePHARE} configuration file}\label{appendix:config_lephare}
+\lstinputlisting{Appendix1/des_more_ext.para.txt}
+
+\chapter{False-colour image code}\label{appendix:false_colour}
+\paragraph{} This appendix briefly describes the process of generating the false-colour images in Figure \ref{fig:candidates_5} and \ref{fig:candidates_6}. These pictures have been produced by a custom code created by the author, which combines \SI[product-units = repeat]{25 x 25}{pix} (\SI[product-units = repeat]{6.6 x 6.6}{\arcsec}) cutouts of the DES $g$, $r$, $i$ and $z$ imaging into a single picture of each object. Firstly, the code colours each cutout with one of four hues (\ang{90} apart on the colour-wheel in order to span the full colour space; see \citealt{2007AJ....133..598R} and \citealt{2017PASP..129e8007R}). The hues are magenta-blue (\ang{270}) for the $g$-band, cyan (\ang{180}) for the $r$-band, green-yellow (\ang{90}) for the $i$-band and red (\ang{0}) for the $z$-band. In order to amplify the source signal compared to the background noise, the code caps the pixel values in each image at -3 counts and +10 counts and scales them via a square function. To brighten the colours of the final false-colour picture, each pixel is converted to a trio of RGB values, and the three RGB values are amplified\footnote{This is necessary because of the specifics of combining four colours. Adding together four colours separated by \ang{90} on the colour wheel results in an image where a pixel that is maximally bright in all four colours shows up as grey instead of white. Since this leads to dimmer colours that obfuscate the candidate sources, the pixel values are amplified to increase the brightness.} by a factor of 4. False-colour images are then created by averaging the four $g$, $r$, $i$, $z$ input images, with the average R, G and B values computed by taking the mean of the four input R, G and B values in each pixel. If the colour-brightening amplification increased any of the R, G, or B values in a given pixel over the maximum of 255, the code scales back all three values of the RGB trio by the same amount so that the maximum value is 255 in R, G or B. This ensures that the (false) colour of the brightest pixels is preserved.
+

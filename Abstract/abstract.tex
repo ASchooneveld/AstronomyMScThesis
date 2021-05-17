@@ -1,0 +1,18 @@
+% ************************** Thesis Abstract *****************************
+% Use `abstract' as an option in the document class to print only the titlepage and the abstract.
+
+\newgeometry{left=45mm,right=40mm,top=45mm,bottom=40mm}
+\begin{abstract}
+In this thesis I explore photometric redshifts and high-redshift galaxies using multiwavelength datasets,
+in particular the combination of optical and near-infrared broadband photometry.
+
+%In this thesis I explore various aspects and applications of multiwavelength datasets, in particular the combination of optical and near-infrared broadband photometry.\par
+
+Firstly, I merge optical imaging from the deep fields of the Dark Energy Survey (DES) with near-infrared data from the Vista Deep Extragalactic Observations (VIDEO) survey, producing a 10-band ($grizYZYJHK_{s}$) multiwavelength catalogue. I achieve this via forced photometry, where the deeper DES data is applied to determine detections which are used to extract flux measurements from the VIDEO imaging. I demonstrate that this technique increases the total number of objects with VIDEO data by 22\% compared to simple position matching, and by as much as 34\% in a sub-region where DES is especially deep compared to VIDEO. The final combined catalogue contains \num{2152575} unique objects over a footprint of 12.1 deg\textsuperscript{2}, with 10.8 deg\textsuperscript{2} reaching $5\sigma$ limiting magnitudes of at least $z_{5\sigma}=24.9$, of which 4.3 deg\textsuperscript{2} reaches at least $z_{5\sigma}=26.2$. \par
+
+Secondly, I compute photometric redshifts for the DES+VIDEO catalogue. I test 18 configurations for the template fitting code \texttt{LePHARE} (2 different template sets and 9 different options for each) and assess their performance compared to spectroscopic redshifts, measuring the bias, scatter, outlier fractions, and high-redshift accuracy. I find that the most optimal configuration at high redshifts adds emission lines to the templates, incorporates adaptive offsets, applies an $N(z)$ prior, uses fixed aperture photometry, and includes both optical and near-IR fluxes. I also study the implications of the photometric redshift tests for general (low-redshift dominated) applications. There, the most important result is that adding near-infrared fluxes strongly improves photometric redshifts, with lower scatter ($\sigma$ lower by 1.1\% and 25.5\% for the two template sets, and $\sigma_{68}$ lower by 45.9\% and 56.4\%) and lower outlier fractions ($f_{2\sigma}$ lower by 12.9\% and 25.5\%, and $f_{3\sigma}$ lower by 14.3\% and 33.5\%). I also determine a suitable star-galaxy separation method for the DES+VIDEO catalogue based on SED fitting. For this separation, I demonstrate that near-infrared data is also of crucial importance: without VIDEO data the stellar contamination rate increases by a factor of 22-35. \par
+
+Lastly, I use the DES+VIDEO photometric redshifts to find bright ($m_{AB}<25.0$) high-redshift ($z\gtrsim5$) Lyman-break galaxies. Using a series of targeted cuts, I identify 34 $z\sim5$ candidates at $z\sim5$ and 36 candidates at $z\sim6$.
+
+\end{abstract}
+\restoregeometry

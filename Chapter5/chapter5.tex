@@ -1,0 +1,123 @@
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%****************************** FIFTH Chapter **********************************
+%*******************************************************************************
+\chapter{Summary and conclusion}\label{chapter:conclusion}
+
+% **************************** Define Graphics Path **************************
+
+
+\ifpdf
+    \graphicspath{{Chapter5/Figs/Raster/}{Chapter5/Figs/PDF/}{Chapter5/Figs/}}
+\else
+    \graphicspath{{Chapter5/Figs/Vector/}{Chapter5/Figs/}}
+\fi
+
+
+A core part of the research presented in this thesis has concentrated around applications of multiwavelength survey datasets. As we saw in Chapter \ref{chapter:introduction}, modern advancements in imaging technology have created highly sophisticated instrumentation capable of conducting surveys that efficiently capture the night sky in digital imaging. Over the last 30 years, such survey datasets have become an integral part of observational astronomy, revolutionising many parts of cosmology and galaxy evolution studies. This thesis has capitalised on those developments, producing a combined optical+near-IR catalogue over the largest area to comparable depths so far. That data has been used to address a number of important astronomical challenges, specifically the computation of photometric redshifts and the identification of a sample of candidate $z\gtrsim5$ galaxies. The current chapter summarises and concludes all this work, revisiting the core findings in each of the three parts of this thesis. \par  
+
+%IT ALSO DISCUSSES FUTURE WORK 
+
+
+\section{Summary of Chapter 2: combined \DESVIDEO catalogue}
+Chapter \ref{chapter:catalogue} described the process of merging the optical $griz$ data from the Dark Energy Survey (DES) deep fields with the near-infrared $ZYJHK_{s}$ VISTA Deep Extragalactic Observations Survey (VIDEO). The two datasets were added together via a specially created automated data processing pipeline, which extracted forced photometry directly from the VIDEO imaging using a deeper DES $r+i+z$ image for source detections. The pipeline then added the measured VIDEO fluxes to pre-existing DES catalogues, producing a catalogue that contains \num{2 443 576} total detections originating from \num{2 152 575} unique sources, altogether spanning a total footprint of 12.1 deg\textsuperscript{2}. A large portion covering 10.8 deg\textsuperscript{2} reaches $5\sigma$ limiting magnitudes of at least $z_{5\sigma}=24.9$, of which 4.3 deg\textsuperscript{2} reaches at least $z_{5\sigma}=26.2$. \par
+
+
+While creating the \DESVIDEO pipeline, this thesis  produced two main results that are important to survey science in general. For starters, it has provided further evidence for a well-supported (e.g. \citealt{2003AJ....125.1107L,2006ApJS..162....1G,2011ApJ...735...86W,2013ApJS..206....8M}) vital requirement for processing survey datasets: if imaging has been resampled to a different pixelscale, it is necessary to correct photometric errors to account for correlated noise. Section \ref{subsubsection:error_discussion} showed that without such corrections, the VIDEO uncertainties measured by \texttt{SExtractor} would be underestimated by as much as a factor of 2 in some filters. Because accurate uncertainties are important to many applications in astronomy (not in the least to photometric redshifts), it is imperative that anyone who wishes to compile catalogues from resampled imaging must thus take great care to measure the photometric noise properties correctly. A second key finding was presented in Section \ref{subsection:forced_phot_verification}, and concerns the power of forced photometry when combining different surveys. By extracting VIDEO forced photometry via DES detection image deeper than VIDEO, this thesis managed to increase the total number of (unique) VIDEO detections by 22\% compared to the number that would have been obtained by simply position matching the existing DES and VIDEO tables. In a sub-region where the DES data is especially deep compared to VIDEO, this increase was as high as 34\%. This thesis therefore further adds to the existing evidence for the power of combining surveys through forced photometry. It has demonstrated clearly that a deeper survey can be leveraged to extract more flux information from a shallower one, increasing the number of secure detections in the shallower dataset, while at the same time adding more wavebands to the deeper. In this way, forced photometry unlocks a form of synergy between surveys at different wavelengths. This thesis therefore advocates that observatories with different wavelength coverage coordinate surveys in the same fields. It also recommends that forced photometry be used to take full advantage of any overlapping datasets that already exist. \par 
+
+
+%This thesis therefore recommends that different observatories continue to move in the direction of coordinating surveys in the same fields. %It also suggests that 
+
+%This observation will be valuable for the design of future surveys, or to take full advantage of any overlapping datasets that already exist. 
+
+%take full advantage of %get the most out of %maximally exploit
+
+
+
+The most important result of Chapter \ref{chapter:catalogue}, however, is probably the \DESVIDEO catalogue itself. As mentioned above, this dataset contains VIDEO fluxes from more (generally fainter) objects than can be achieved with VIDEO alone, boosting the amount of information available from this survey. Besides, Section \ref{subsection:multiwavelength} outlined the great potential of multiwavelength datasets, which have a wide range of applications in modern astronomy.  Together, the ten $grizYZYJHK_{s}$ filters in the \DESVIDEO catalogue provide a wealth of multiwavelength information over optical and near-infrared frequencies. Since both the DES and VIDEO datasets used in this thesis have recently become publicly available, the \DESVIDEO catalogue thus forms a useful resource for the astronomical community. \par 
+
+\subsection{Suggestions for future work}
+One of the ways that future work could improve the \DESVIDEO catalogue is by measuring aperture corrections for the photometry. As explained in Section \ref{subsubsection:aperture_corrections}, such corrections were not strictly necessary for the work in this thesis, and due to the challenging and time-consuming nature of accurately measuring the inhomogenous DES PSF this was considered beyond the scope of this thesis. However, including such corrections would further add to the value of the catalogue as a resource for the general astronomical community. \par 
+
+In a similar vein, the scientific value of the catalogue could be increased by the addition of \textit{Spitzer} IRAC fluxes from SERVS (see Section \ref{subsection:visual_inspection}). Such measurements would likely not have been useful for photometric redshifts \citep{2010A&A...523A..31H}, but would further broaden the scope of the catalogue for general use. Forced photometry with DES detection images can increase the amount of information extracted from the SERVS imaging, and at the same time add mid-IR wavebands to the catalogue. It is worth noting that, due to the large difference in PSF size between the DES and IRAC imaging, this endeavour would require a method for accurately deblending IRAC sources, such as that used by e.g. \cite{2006ApJ...649L..67L} and \cite{2013ApJS..206....8M}. \par 
+
+Finally, in future, improvements to the catalogue can be made by adding data from later DES and VIDEO releases, which are expected to have higher limiting magnitudes and include imaging for the full set of VIDEO filters in all tiles. Thanks to the automated nature of the pipeline created for this thesis, this suggestion should be relatively straightforward to implement. \par
+
+
+
+\section{Summary of Chapter 3: photometric redshifts}
+Chapter \ref{chapter:photometric_redshifts} focused on computing photometric redshifts for the \DESVIDEO catalogue created in Chapter \ref{chapter:catalogue}. The first point of action was to test 18 configurations of the template fitting code \texttt{LePHARE} on a sample of \num{35 596} \DESVIDEO sources with spectroscopic redshifts. These configurations were based on two sets of templates (the \texttt{AVEROI\_NEW} SEDs, and the \texttt{COSMOS} SEDs), and nine different options for photo-z code features and input photometry were trialled for each of the two sets. To assess the performance of each setup, the quality of the output photometric redshifts was quantified via a series of eight accuracy metrics capturing the bias, scatter, outlier fractions, and high-redshift accuracy, measured using the known spectroscopic redshifts. \par 
+
+Section \ref{section:photoz_discussion} then compared and analysed the metrics of all the setups, in order to find the most suitable configuration (for each template set) to use on the full \DESVIDEO catalogue. The primary aim here was to achieve optimal performance at high redshifts. For both template sets, it was concluded that the most suitable high-redshift setups add emission lines to the SEDs, apply adaptive offsets, apply an $N(z)$ prior, use fixed  aperture photometry, and include near-IR VIDEO fluxes. Regarding the extinction parameters, it was established that values of up to $E(B-V) = 0.5$ perform best for the \texttt{COSMOS} templates, while the most appropriate values for the \texttt{AVEROI\_NEW} templates include extinction up to $E(B-V)=2.0$. \par
+
+
+%CAN INFORM FUTURE RESEARCH, SO WILL BE LISTED
+%SHORTEN THIS
+%As Section \ref{subsection:conclusion_photoz_intro} indicated in the introduction, one of the aims of this thesis has been to use the \DESVIDEO dataset to determine how to optimise photo-zs for the sake of future research.
+
+Section \ref{section:photoz_discussion} also investigated what the \DESVIDEO tests imply for photometric redshift studies in general. This analysis omitted the high-redshift accuracy metrics, and looked only at those statistics that apply to the full testing sample --- i.e. the bias, scatter, and outlier fractions. These primarily reflect the accuracy for the low-redshift ($z_{\mathrm{spec}}\lesssim1.5$) majority of galaxies in the sample, which is also approximately the range that most photo-z studies tend to focus on. The \DESVIDEO tests established the following conclusions: %THE \DESVIDEO TESTS FOUND THE FOLLOWING CONCLUSIONS 
+
+
+\begin{itemize}
+    \item The \texttt{COSMOS} templates perform best with extinction values up to $E(B-V) = 0.5$. For the \texttt{AVEROI\_NEW} SEDs, the best accuracy is instead achieved with values up to $E(B-V) = 1.0$. Notably, this is higher than the values of $E(B-V) \leq 0.6$ used in the \cite{2007A&A...476..137A} study that produced the \texttt{AVEROI\_NEW} templates, and substantially higher than the $E(B-V) \leq 0.3$ recommendation in the \texttt{README} files of the \texttt{LePHARE} installation. Future users of these SEDs may want to bear this in mind. 
+    
+
+    \item For the \texttt{COSMOS} templates, enabling the option to let \texttt{LePHARE} add emission lines to the templates generally improves photometric redshifts. The data did not conclusively establish whether this is also the case for the \texttt{AVEROI\_NEW} SEDs.
+    
+    \item  The \DESVIDEO tests also support the usefulness of the $N(z)$ prior and adaptive offset features in \texttt{LePHARE}. It was demonstrated that the use of the prior improves the scatter for both template sets. Applying adaptive offsets was similarly found to be helpful, particularly with regard to the scatter and outlier fractions.
+    
+    \item Fixed aperture magnitudes constitute the best way to supply input photometry for the \texttt{COSMOS} templates. For the \texttt{AVEROI\_NEW} SEDs, it was inconclusive whether auto or fixed aperture photometry yield better results. 
+    
+    \item An especially important part of Section \ref{section:photoz_discussion} consisted of an in-depth analysis of the impact of near-IR photometry on the \DESVIDEO redshifts. This thesis resoundingly showed that adding near-IR VIDEO fluxes to the optical DES data leads to considerably lower scatter and outlier fractions. For the \texttt{AVEROI\_NEW} and \texttt{COSMOS} templates respectively, the near-IR data reduced $\sigma$ by 1.1\% and 25.5\%, $\sigma_{68}$ by 45.9\% and 56.4\%, $f_{2\sigma}$ by 12.9\% and 25.3\%, and $f_{3\sigma}$ by 14.3\% and 33.5\%.  While the beneficial effect of near-IR data was generally noted at all redshifts, the VIDEO photometry was found to be especially important in the area around $ 2 \lesssim z_{\mathrm{phot}} \lesssim 3$, where the \SI{4000}{\angstrom} break has redshifted out of the optical filters but can still be constrained in the near-IR. Altogether, the data thus presents strong evidence for the importance of the near-IR waveband for photometric redshift studies. 
+    
+    %adding a bigger/more comprehensive set of evidence to papers by e.g. Banerji, Ilbert, Jarvis
+
+\end{itemize}
+
+% In addition to these findings, the final conclusion from the photo-z analysis in Section \ref{section:photoz_discussion} that will be summarised here concerns the choice of templates.
+ 
+ %THIS LEAVES THE QUESTION OF WHAT TEMPLATE SET TO USE
+This leaves the template comparison as the final result from Section \ref{section:photoz_discussion} to be summed up here. When considering the outcome for the (low-redshift dominated) totality of redshifts, it was found that the \texttt{COSMOS} templates conclusively outperform the \texttt{AVEROI\_NEW} SEDs in most metrics and configurations. At high redshifts, however, the latter correctly retrieve more true high-redshift galaxies. To ensure the \DESVIDEO catalogue is as versatile as possible as a resource for the astronomical community, photo-zs were added for both collections of templates, using the best high-redshift configurations summarised earlier in this section. Notably, for the \texttt{COSMOS} templates this configuration is the same as the best-performing setup in the general (low-redshift dominated) regime, and it is recommended that any low-redshift studies use the photo-zs from these templates. However, the high-redshift search in Chapter \ref{chapter:high_redshift_candidates} of this thesis has made use of the \texttt{AVEROI\_NEW} redshifts instead. \par
+
+The task of separating out the nonsensical photo-zs of stellar sources was explored in Section \ref{subsection:star_galaxy}, which described the process of identifying a star-galaxy separation method suited to this thesis. The strategy that was proposed is an SED-based method where galaxies are identified based on the goodness-of-fit of the best-fitting galaxy template compared to the best-fitting stellar template. An advantage of this approach is that it works on unresolved galaxies (common at e.g. high redshifts), unlike most standard methods for survey datasets which often rely on morphological information. When validated on a set of spectroscopically confirmed stars and galaxies, the method in this thesis was found to be highly successful, misclassifying only around 2\% of true stars as galaxies. A related important discovery is that near-infrared data is of crucial importance to SED-based separation --- without including VIDEO data in the fitting, the stellar contamination rate increased enormously by a factor of \numrange{22}{35}. When taken together with the improvement in photo-z accuracy established before, this result further emphasises the importance of near-IR data to modern survey science. \par 
+
+
+\subsection{Suggestions for future work}
+The scope of the general photometric redshift research in Chapter \ref{chapter:photometric_redshifts} could be expanded by applying the \DESVIDEO tests to a wider range of codes. Even though \texttt{LePHARE} is likely the most suitable code for this thesis (as explained in Section \ref{subsection:code_choice}), extending the tests to other codes will yield additional useful results for the field of photometric redshift studies. \par 
+
+Secondly, future work could make the conclusions of the star-galaxy separation validation in  Section \ref{subsection:star_galaxy} more widely applicable. That verification process used a truth catalogue with a far smaller number of stars (compared to galaxies) than is realistic for survey datasets. The stellar contamination ratios found in this thesis therefore cannot be meaningfully compared to those of other studies. To give a more realistic estimate of the real stellar contamination, which would allow direct comparisons between the star-galaxy separation method in this thesis and others in the literature, future work could apply the method to a representative sample of simulated stars and galaxies. It is important that such simulations accurately replicate the \DESVIDEO imaging by taking account of the variable PSF and image quality, especially for the inhomogeneous DES data. \par 
+
+
+
+
+
+\section{Summary of Chapter 4: high-redshift galaxies}
+Chapter \ref{chapter:high_redshift_candidates} presented the search for the brightest ($m_{\mathrm{AB}}<25.0$) high-redshift Lyman-break galaxies in the \DESVIDEO dataset. This endeavour made use of the photometric redshifts computed in Chapter \ref{chapter:photometric_redshifts}, applying various targeted cuts that resulted in a final sample of 34 unique galaxy candidates at $z\sim5$ and 36 at $z\sim6$. Accounting for the magnitude and depth requirements in the selection cuts, the effective search areas over which these two candidate sets have been gathered equal 6.1 deg\textsuperscript{2} and 4.9 deg\textsuperscript{2} respectively, the largest footprints currently available in datasets of comparable depth. \par 
+
+
+The $z\sim6$ candidates were then compared against those from two similar $z\sim6$ studies in the literature (by \citealt{2015MNRAS.452.1817B} and \citealt{2013AJ....145....4W}). The first such comparison in Section \ref{subsubsection:expected_number} looked at the expected number of galaxies based on these two studies. It was found that the \DESVIDEO sample size is larger than the numbers from previous studies, but several reasons were identified why those expected numbers are likely too low or unreliable. Subsequently, there is no evidence for considerable contamination in the $z\sim6$ sample. \par 
+
+The sizeable number of bright $z\sim6$ \DESVIDEO candidates revealed in this thesis thus holds great scientific promise. Prior to this thesis, the known number of such galaxies totalled only 32. Of the 36 \DESVIDEO candidates found by the current work, 33 are new (the 3 others had already been discovered by \citealt{2013AJ....145....4W}). Hence, this thesis more than doubles the number of known bright galaxy candidates at $z\sim6$. \par
+
+
+
+%In Section \ref{subsubsection:expected_number}, it was described how the first of these comparisons indicated that the \DESVIDEO sample size at $z\sim6$ appears larger than expected from scaling up candidate numbers from these previous candidate samples. However, it was explained that these scaled up estimates are very likely too low or too unreliable. Subsequently, there is no evidence for considerable contamination in the $z\sim6$ sample. The sizeable number of bright $z\sim6$ \DESVIDEO candidates revealed in this thesis thus holds great scientific promise; previously, Section \ref{subsubsection:lyman_break_galaxy_history} described how prior to this thesis the known number of such galaxies totalled only 32. Of the 36 \DESVIDEO candidates that were found here, 33 are new ({\color{red}3 had already been found/overlap with previously, as will be recapped shortly below.}). {\color{red} Hence, this thesis more than doubles the number of known bright galaxy candidates at $z\sim6$.}
+
+
+In Section \ref{subsubsection:willott_compare}, the second comparison with previous research looked at the candidates from the study by \cite{2013AJ....145....4W}, which partly overlaps the \DESVIDEO footprint. It was found that the results from this thesis agree well with theirs. The \DESVIDEO sample contains all three of the \cite{2013AJ....145....4W} candidates that pass the $z_{\mathrm{AB}}<25.0$ magnitude cut imposed in this thesis, including an object spectroscopically confirmed at $z_{\mathrm{spec}}=6.068$.  Since \cite{2013AJ....145....4W} selected their candidates via colour cuts rather than photometric redshifts, this agreement presents an independent corroboration of the selection method in this thesis. It therefore imparts a good degree of confidence in the \DESVIDEO sample. \par
+
+
+%The second comparison with previous studies looked at the candidates in a region of \DESVIDEO that overlaps the similar $z\sim6$ study by \cite{2013AJ....145....4W}. It was found that the results from this thesis agree well with theirs. 
+
+\subsection{Suggestions for future work}
+The most important avenue of future research for this thesis is obtaining spectra for as many of the \DESVIDEO candidates as possible. If the high-redshift status of these objects is confirmed, this would prove directly that the selection method in this thesis is able to isolate real (previously unknown) high-redshift galaxies. Such confirmation would also increase the number of known bright $z\gtrsim5$ galaxies with a confirmed high-redshift status, and the spectra would enable measurements of the strength of the Lyman-$\alpha$ line. This can be useful for constraining reionisation in ways described in Section \ref{subsubsection:high_redshift_galaxy_evolution}. \par
+
+If the effectiveness of the selection method in this thesis is confirmed by spectroscopic observations, the samples of \DESVIDEO high-redshift galaxies can be used to study the many galaxy properties outlined in Section \ref{subsubsection:high_redshift_galaxy_evolution}. The UV luminosity function at $z=6$ is potentially the most impactful of these. As explained in Section \ref{subsubsection:high_redshift_galaxy_evolution}, this quantity is currently not well constrained at the very bright end due to the small number of previously known objects in this regime. Since the 36 $z\sim6$ \DESVIDEO objects double the number of available $m_{\mathrm{AB}}<25.0$ candidates at this redshift, they would be able to make a considerable contribution to constraining the LF. To compute the \DESVIDEO LF accurately it will be necessary to perform simulations that measure the purity and completeness of the \DESVIDEO candidate selection. Once again, it is important that such simulations take the inhomogeneous nature of the imaging into account properly. Besides the luminosity function, galaxy stellar masses are another major property from Section \ref{subsubsection:high_redshift_galaxy_evolution} that the \DESVIDEO sample could help to investigate. Thanks to the aforementioned IRAC SERVS data, many candidates have available mid-IR data that can probe the observed-frame optical emission from lower-mass stars, which may make up the bulk of stellar mass. Lastly, dust attenuation at high redshifts is a further property suggested in Section \ref{subsubsection:high_redshift_galaxy_evolution} that can be examined via the \DESVIDEO candidates. \par   
+
+By finding a substantial number of very bright candidate Lyman-break galaxies at $z\sim5$ and $z\sim6$, this thesis has therefore laid some of the groundwork for potential important discoveries within the field of high-redshift galaxy evolution. 
+
+%"INTERESTING" OR "IMPORTANT" DISCOVERIES
+
+%The author hopes that future discoveries can use these?
+
+%THIS THESIS HAS COMPLETED THE IMPORTANT GROUNDWORK OF SELECTING A SAMPLE OF GALAXIES. FUTURE WORK CAN USE THESE 

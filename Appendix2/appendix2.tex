@@ -1,0 +1,20 @@
+\chapter{Functional form for the prior}\label{appendix:prior_function}
+\paragraph{} \cite{2006A&A...457..841I} devise a functional form for the prior $P(z, T | m_{0})$, by once more using Bayes' theorem to obtain: 
+
+\begin{equation}
+P(z, T | m_{0}) = P(T | m_{0}) P(z | T, m_{0}). \label{eqn:prior}
+\end{equation}
+
+$P(z|T, m_{0})$ is parameterised as:
+ 
+\begin{equation}
+P(z|T,m_{0})  \propto z^{\alpha_{T}}\exp{-\left[ \frac{z}{z_{oT}+k_{mT}(m_{0} -20)} \right]},\label{eqn:redshift_distr}
+\end{equation}
+
+\noindent where $\alpha_{T}$, $z_{0T}$, $k_{mT}$ are free parameters and $T$ encapsulates the dependence on spectral type. The other part of Equation \ref{eqn:prior}, $P(T|m_{0})$, gives the magnitude distribution of spectral types and is parameterised as
+
+\begin{equation}
+P(T|m_{0}) = f_{T} e^{-k_{T}(m_{0}-20)},\label{eqn:spectral_distr}
+\end{equation}
+
+where $k_{T}$ is a free parameter  and $f_{T}$ is the fraction of each type at $m_{0} = 20 \textrm{ mag AB}$. Following the formalism in \cite{2000ApJ...536..571B}, \cite{2006A&A...457..841I} calibrated the values for all four free parameters using a deep and representative $I$-selected spectroscopic sample from VVDS \citep{2005A&A...439..845L} using data from a (different) $i'$ band for $m_{0}$. To quantify the dependence on spectral type, the sample was divided into four different spectral type groups (according to the four optimised CWW  templates [\cite{1980ApJS...43..393C}, \cite{2006A&A...457..841I}]). For each group,  $f_T$ and $k_T$ were determined by fitting Equation \ref{eqn:spectral_distr} to the observed magnitude distribution. Likewise, the redshift distrubution of each spectral type group was fitted to {\color{red} Equation \ref{eqn:redshift_distr}} to obtain $\alpha_{T}$, $z_{0,T}$ and $k_{mT}$. 
